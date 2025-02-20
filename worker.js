@@ -31,7 +31,7 @@ const config = {
     }
     console.log("path: "+path)
 
-    const value = await shorter.get(path);
+    const value = await KV.get(path);
     let location ;
   
     if(params) {
@@ -40,6 +40,10 @@ const config = {
       location = value
     }
     console.log(value)
+    
+    if(location){
+      return Response.redirect(location, 302)
+    }
 
     // If request not in kv, return 404
     return new Response(html404, {
